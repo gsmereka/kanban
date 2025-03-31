@@ -24,15 +24,17 @@ public class MainMenu {
         var option = -1;
         while (true){
             System.out.println("1 - Criar um novo board");
-            System.out.println("2 - Selecionar um board existente");
-            System.out.println("3 - Excluir um board");
-            System.out.println("4 - Sair");
+            System.out.println("2 - Ver todos os boards existentes");
+            System.out.println("3 - Selecionar um board existente");
+            System.out.println("4 - Excluir um board");
+            System.out.println("5 - Sair");
             option = scanner.nextInt();
             switch (option){
                 case 1 -> createBoard();
-                case 2 -> selectBoard();
-                case 3 -> deleteBoard();
-                case 4 -> System.exit(0);
+                case 2 -> showAllBoards();
+                case 3 -> selectBoard();
+                case 4 -> deleteBoard();
+                case 5 -> System.exit(0);
                 default -> System.out.println("Opção inválida, informe uma opção do menu");
             }
         }
@@ -88,6 +90,18 @@ public class MainMenu {
                     b -> new BoardMenu(b).execute(),
                     () -> System.out.printf("Não foi encontrado um board com id %s\n", id)
             );
+        }
+    }
+
+    private void showAllBoards() throws SQLException {
+        System.out.println("\n---\nAqui estão todos os Boards registrados:\n");
+        try(var connection = getConnection()){
+            var queryService = new BoardQueryService(connection);
+            List<BoardEntity> boards = queryService.findAll();
+            for (BoardEntity board : boards) {
+                System.out.println("ID: " + board.getId() + ", Name: " + board.getName());
+            }
+            System.out.println("\n---");
         }
     }
 
