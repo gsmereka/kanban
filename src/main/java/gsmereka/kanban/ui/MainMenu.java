@@ -34,7 +34,9 @@ public class MainMenu {
                 case 2 -> showAllBoards();
                 case 3 -> selectBoard();
                 case 4 -> deleteBoard();
-                case 5 -> System.exit(0);
+                case 5 -> {
+                    return;
+                }
                 default -> System.out.println("Opção inválida, informe uma opção do menu");
             }
         }
