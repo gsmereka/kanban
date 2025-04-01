@@ -16,7 +16,7 @@ public class Main {
 
 		ConnectionConfig.configConnection("jdbc:mysql://localhost:3306/board", "board", "board");
 		try(var connection = getConnection()){
-			new MigrationStrategy(connection).executeMigration();
+			new MigrationStrategy(connection).executeMigration("/db/changelog/db.changelog-master.yml");
 		}
 		new MainMenu().execute();
 	}
