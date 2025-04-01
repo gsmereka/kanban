@@ -23,7 +23,8 @@ public class MainMenuTest {
         try(var connection = getConnection()){
             new MigrationStrategy(connection).executeMigration("/db/changelog/db.changelog-for-tests.yml");
         }
-        String simulatedInput = "1\nBoard\n0\nColuna Inicial\nColuna Final\nColuna Cancelamento\n5";
+//        String simulatedInput = "1\nBoard\n0\nColuna Inicial\nColuna Final\nColuna Cancelamento\n5";
+        String simulatedInput = "2\n5\n";
         InputStream in = new ByteArrayInputStream(simulatedInput.getBytes());
         System.setIn(in);
 
