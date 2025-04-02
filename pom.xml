@@ -56,6 +56,14 @@
 	<build>
 		<plugins>
 			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>3.5.0</version>
+				<configuration>
+					<mainClass>gsmereka.kanban.Main</mainClass> <!-- Substitua com o nome da sua classe principal -->
+				</configuration>
+			</plugin>
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
@@ -102,3 +110,5 @@
 		</pluginRepository>
 	</pluginRepositories>
 </project>
+
+
