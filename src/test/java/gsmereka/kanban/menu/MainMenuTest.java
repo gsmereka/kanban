@@ -42,6 +42,21 @@ public class MainMenuTest {
     }
 
     @Test
+    public void testInvalidOption() {
+        assertDoesNotThrow(() -> runTestWithInput("99\n5\n"));
+    }
+
+    @Test
+    public void testSelectNonExistentBoard() {
+        assertDoesNotThrow(() -> runTestWithInput("3\n999\n5\n"));
+    }
+
+    @Test
+    public void testDeleteNonExistentBoard() {
+        assertDoesNotThrow(() -> runTestWithInput("4\n999\n5\n"));
+    }
+
+    @Test
     public void testAddBoard(){
         try {
             runTestWithInput("2\n1\nBoard\n0\nColuna Inicial\nColuna Final\nColuna Cancelamento\n5");
