@@ -2,10 +2,9 @@ package gsmereka.kanban.menu;
 
 import com.jayway.jsonpath.InvalidPathException;
 import gsmereka.kanban.persistence.config.ConnectionConfig;
-import gsmereka.kanban.persistence.entity.BoardEntity;
 import gsmereka.kanban.persistence.migration.MigrationStrategy;
 import gsmereka.kanban.service.BoardQueryService;
-import gsmereka.kanban.ui.BoardMenu;
+import gsmereka.kanban.service.BoardService;
 import gsmereka.kanban.ui.MainMenu;
 import org.junit.jupiter.api.Test;
 
@@ -45,7 +44,7 @@ public class MainMenuTest {
     @Test
     public void testAddBoard(){
         try {
-            runTestWithInput("1\nBoard\n0\nColuna Inicial\nColuna Final\nColuna Cancelamento\n5");
+            runTestWithInput("2\n1\nBoard\n0\nColuna Inicial\nColuna Final\nColuna Cancelamento\n5");
         } catch (Exception e) {
             fail("Uma exceção inesperada foi lançada: " + e.getMessage());
         }
@@ -77,6 +76,8 @@ public class MainMenuTest {
         ConnectionConfig.configConnection("jdbc:mysql://localhost:9898/KanbanTest", "KanbanTest", "KanbanTest");
 
         try (var connection = getConnection()) {
+            var clearQueryService = new BoardService(connection);
+            clearQueryService.deleteAll(); // RESET DATA BASE
             new MigrationStrategy(connection).executeMigration("/db/changelog/db.changelog-for-tests.yml");
         } catch (SQLException e) {
             fail("SQLException foi lançada: " + e.getMessage());

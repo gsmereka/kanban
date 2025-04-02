@@ -78,4 +78,17 @@ public class BoardDAO {
         }
         return boards;
     }
+
+    public void deleteAll() throws SQLException {
+        var sql = "DELETE FROM BOARDS;";
+        try (var statement = connection.prepareStatement(sql)) {
+            statement.executeUpdate();
+        }
+
+        var resetAutoIncrementSql = "ALTER TABLE BOARDS AUTO_INCREMENT = 1;";
+        try (var statement = connection.prepareStatement(resetAutoIncrementSql)) {
+            statement.executeUpdate();
+        }
+    }
+
 }

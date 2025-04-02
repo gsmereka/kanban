@@ -48,4 +48,14 @@ public class BoardService {
         }
     }
 
+    public void deleteAll() throws SQLException {
+        var dao = new BoardDAO(connection);
+        try{
+            dao.deleteAll();
+            connection.commit();
+        } catch (SQLException e) {
+            connection.rollback();
+            throw e;
+        }
+    }
 }
